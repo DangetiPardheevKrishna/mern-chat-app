@@ -5,9 +5,14 @@ import messageRoutes from "./routes/message.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import connectToMongoDB from "./db/connectToMongoDB.js";
 import cookieParser from "cookie-parser";
-const app = express();
+import path from "path";
+import { app, io, server } from "./socket/socket.js";
 const PORT = process.env.PORT || 5000;
-
+// const __dirname = path.resolve();
+// app.use(express.static(path.join(__dirname, "/frontend/dist")));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+// });
 dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
@@ -30,7 +35,7 @@ app.use("/api/users", userRoutes);
 //     console.log("login route")
 //     })
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   connectToMongoDB();
   console.log(`server running on port : ${PORT}`);
 });

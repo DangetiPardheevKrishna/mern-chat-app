@@ -9,7 +9,7 @@ const protectRoute = async (req, res, next) => {
         .json({ error: "Unauthorized - No Token Provided" });
     }
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    console.log(decoded);
+
     if (!decoded) {
       return res
         .status(401)
@@ -21,6 +21,7 @@ const protectRoute = async (req, res, next) => {
       return res.status(404).json({ error: "User not found" });
     }
     req.user = user;
+
     next();
   } catch (error) {
     console.log("Error in protectedRoute", error.message);
