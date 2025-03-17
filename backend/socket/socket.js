@@ -12,7 +12,7 @@ export const getReceiverSocketId = (receiverId) => {
 
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3000"],
+    origin: ["https://mern-chat-app-3rtz.onrender.com/"],
     methods: ["GET", "POST"],
   },
 });
